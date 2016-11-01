@@ -13,7 +13,7 @@ namespace ListaPendientesApp
         {
             InitializeComponent();
 
-            MainPage = new ListaPendientesApp.MainPage();
+            MainPage = new NavigationPage(new PendientesPage());
         }
 
         protected override void OnStart()

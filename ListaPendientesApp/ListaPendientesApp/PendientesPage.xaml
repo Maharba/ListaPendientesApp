@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ListaPendientesApp.PendientesPage"
+             Title="Pendientes">
+  <ContentPage.ToolbarItems>
+    <ToolbarItem x:Name="tbiAgregar" Text="Agregar"></ToolbarItem>
+  </ContentPage.ToolbarItems>
+  <ListView x:Name="lstPendientes">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <TextCell Text="{Binding Descripcion}" Detail="{Binding Fecha}" DetailColor="Gray"></TextCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+</ContentPage>

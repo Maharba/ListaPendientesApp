@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ListaPendientesApp.PendientePage"
+             Title="Nuevo Pendiente">
+  <StackLayout VerticalOptions="Center" Spacing="5">
+    <Entry x:Name="txtDescripcion" Placeholder="Descripción"></Entry>
+    <Label Text="Fecha"></Label>
+    <DatePicker x:Name="dtFecha"></DatePicker>
+    <StackLayout Orientation="Horizontal">
+      <Switch x:Name="swHecho"></Switch>
+      <Label Text="Hecho"></Label>
+    </StackLayout>
+  </StackLayout>
+</ContentPage>
