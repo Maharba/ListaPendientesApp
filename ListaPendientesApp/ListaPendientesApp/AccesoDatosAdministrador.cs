@@ -21,7 +21,31 @@ namespace ListaPendientesApp
         {
             var dependencia = DependencyService.Get<ISQLite>();
             _conexionBaseDatos = dependencia.ObtenerConexion();
+            Pendientes = new ObservableCollection<Pendiente>(_conexionBaseDatos.Table<Pendiente>());
+        }
 
+        public ObservableCollection<Pendiente> ObtenerListaPendientes()
+        {
+            return Pendientes;
+        }
+
+        public Pendiente ObtenerPendiente(string descripcion, DateTime fecha, bool estahecho)
+        {
+            var consulta =
+                Pendientes.SingleOrDefault(
+                    p => p.Descripcion == descripcion && p.Fecha == fecha && p.EstaHecho == estahecho);
+            return consulta;
+        }
+
+        public void AgregarPendiente(string descripcion, DateTime fecha, bool estahecho)
+        {
+            Pendiente pendiente = new Pendiente()
+            {
+                Descripcion = descripcion,
+                Fecha = fecha,
+                EstaHecho = estahecho
+            };
+            Pendientes.Add(pendiente);
         }
     }
 }
