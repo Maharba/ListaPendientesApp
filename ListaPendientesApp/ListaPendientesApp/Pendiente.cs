@@ -8,7 +8,7 @@ using SQLite.Net.Attributes;
 
 namespace ListaPendientesApp
 {
-    [Table("Pendiente")]
+    [Table("Pendiente1")]
     public class Pendiente : INotifyPropertyChanged
     {
         private string _descripcion;
@@ -21,7 +21,7 @@ namespace ListaPendientesApp
         /// El ID de cada registro de Pendiente
         /// </summary>
         [PrimaryKey, AutoIncrement]
-        public int ID { get; }
+        public int ID { get; set;  }
 
         /// <summary>
         /// Esta es la descripción de la tarea pendiente

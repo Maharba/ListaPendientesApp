@@ -21,19 +21,19 @@ namespace ListaPendientesApp
         {
             var dependencia = DependencyService.Get<ISQLite>();
             _conexionBaseDatos = dependencia.ObtenerConexion();
+            _conexionBaseDatos.CreateTable<Pendiente>();
             Pendientes = new ObservableCollection<Pendiente>(_conexionBaseDatos.Table<Pendiente>());
         }
 
-        public ObservableCollection<Pendiente> ObtenerListaPendientes()
+        public List<Pendiente> ObtenerListaPendientes()
         {
-            return Pendientes;
+            return _conexionBaseDatos.Table<Pendiente>().ToList();
         }
 
-        public Pendiente ObtenerPendiente(string descripcion, DateTime fecha, bool estahecho)
+        public Pendiente ObtenerPendiente(int id)
         {
             var consulta =
-                Pendientes.SingleOrDefault(
-                    p => p.Descripcion == descripcion && p.Fecha == fecha && p.EstaHecho == estahecho);
+                Pendientes.SingleOrDefault(p => p.ID == id);
             return consulta;
         }
 
@@ -46,6 +46,44 @@ namespace ListaPendientesApp
                 EstaHecho = estahecho
             };
             Pendientes.Add(pendiente);
+        }
+
+        public void EliminarPendiente(Pendiente pendiente)
+        {
+            var id = pendiente.ID;
+            var consulta =
+                _conexionBaseDatos.Table<Pendiente>()
+                    .FirstOrDefault(
+                        p =>
+                            p.Descripcion == pendiente.Descripcion && p.EstaHecho == pendiente.EstaHecho &&
+                            p.Fecha == pendiente.Fecha);
+            
+            if (consulta.ID != 0)
+            {
+                _conexionBaseDatos.Delete<Pendiente>(consulta.ID);
+                Pendientes.Remove(pendiente);
+            }
+        }
+
+        public void GuardarPendiente(Pendiente pendiente)
+        {
+            if (pendiente.ID != 0)
+            {
+                var consulta = Pendientes.SingleOrDefault(p => p.ID == pendiente.ID);
+                if (consulta != null)
+                {
+                    consulta.Descripcion = pendiente.Descripcion;
+                    consulta.Fecha = pendiente.Fecha;
+                    consulta.EstaHecho = pendiente.EstaHecho;
+                    _conexionBaseDatos.Update(pendiente);
+                }
+                
+            }
+            else
+            {
+                AgregarPendiente(pendiente.Descripcion, pendiente.Fecha, pendiente.EstaHecho);
+                _conexionBaseDatos.Insert(pendiente);
+            }
         }
     }
 }

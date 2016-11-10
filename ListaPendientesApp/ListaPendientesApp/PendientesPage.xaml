@@ -5,6 +5,8 @@
              Title="Pendientes">
   <ContentPage.ToolbarItems>
     <ToolbarItem x:Name="tbiAgregar" Text="Agregar"></ToolbarItem>
+    <ToolbarItem x:Name="tbiModificar" Text="Modificar"></ToolbarItem>
+    <ToolbarItem x:Name="tbiEliminar" Text="Eliminar"></ToolbarItem>
   </ContentPage.ToolbarItems>
   <ListView x:Name="lstPendientes">
     <ListView.ItemTemplate>

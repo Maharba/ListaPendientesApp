@@ -10,9 +10,13 @@ namespace ListaPendientesApp
 {
     public partial class PendientePage : ContentPage
     {
+        private AccesoDatosAdministrador _datosAcceso;
+
         public PendientePage()
         {
             InitializeComponent();
+
+            _datosAcceso = new AccesoDatosAdministrador();
         }
 
         protected override void OnDisappearing()
@@ -22,6 +26,11 @@ namespace ListaPendientesApp
             if (!string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 //TODO: Guardar información en una base de datos y archivarla.
+                Pendiente pendiente1 = new Pendiente();
+                pendiente1.Descripcion = txtDescripcion.Text;
+                pendiente1.Fecha = dtFecha.Date;
+                pendiente1.EstaHecho = swHecho.IsToggled;
+                _datosAcceso.GuardarPendiente(pendiente1);
             }
         }
     }
