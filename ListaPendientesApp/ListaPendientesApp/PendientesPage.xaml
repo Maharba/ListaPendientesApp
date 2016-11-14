@@ -6,12 +6,15 @@
   <ContentPage.ToolbarItems>
     <ToolbarItem x:Name="tbiAgregar" Text="Agregar"></ToolbarItem>
     <ToolbarItem x:Name="tbiModificar" Text="Modificar"></ToolbarItem>
-    <ToolbarItem x:Name="tbiEliminar" Text="Eliminar"></ToolbarItem>
   </ContentPage.ToolbarItems>
   <ListView x:Name="lstPendientes">
     <ListView.ItemTemplate>
       <DataTemplate>
-        <TextCell Text="{Binding Descripcion}" Detail="{Binding Fecha}" DetailColor="Gray"></TextCell>
+        <TextCell Text="{Binding Descripcion}" Detail="{Binding Fecha}" DetailColor="Gray">
+          <TextCell.ContextActions>
+            <MenuItem Clicked="MenuItem_Clicked" Text="Eliminar"></MenuItem>
+          </TextCell.ContextActions>
+        </TextCell>
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>

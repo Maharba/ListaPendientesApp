@@ -18,15 +18,31 @@ namespace ListaPendientesApp
 
             tbiAgregar.Clicked += TbiAgregarOnClicked;
             tbiModificar.Clicked += TbiModificarOnClicked;
-            tbiEliminar.Clicked += TbiEliminarOnClicked;
+            
 
             _accesoDatos = new AccesoDatosAdministrador();
             lstPendientes.IsPullToRefreshEnabled = true;
             lstPendientes.Refreshing += LstPendientesOnRefreshing;
+            lstPendientes.ItemSelected += LstPendientesOnItemSelected;
+            lstPendientes.ItemTapped += LstPendientesOnItemTapped;
 
         }
 
-        private void TbiEliminarOnClicked(object sender, EventArgs eventArgs)
+        private void LstPendientesOnItemTapped(object sender, ItemTappedEventArgs itemTappedEventArgs)
+        {
+            Navigation.PushAsync(new PendientePage());
+        }
+
+        private void LstPendientesOnItemSelected(object sender, SelectedItemChangedEventArgs selectedItemChangedEventArgs)
+        {
+            ListView lista = sender as ListView;
+            if (lista != null)
+            {
+                lista.SelectedItem = null;
+            }
+        }
+
+        private void MenuItem_Clicked(object sender, EventArgs e)
         {
             Pendiente pendienteSeleccionado = lstPendientes.SelectedItem as Pendiente;
             if (pendienteSeleccionado != null)
