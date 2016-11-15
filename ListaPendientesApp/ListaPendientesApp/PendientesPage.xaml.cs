@@ -17,7 +17,6 @@ namespace ListaPendientesApp
             InitializeComponent();
 
             tbiAgregar.Clicked += TbiAgregarOnClicked;
-            tbiModificar.Clicked += TbiModificarOnClicked;
             
 
             _accesoDatos = new AccesoDatosAdministrador();
@@ -30,7 +29,8 @@ namespace ListaPendientesApp
 
         private void LstPendientesOnItemTapped(object sender, ItemTappedEventArgs itemTappedEventArgs)
         {
-            Navigation.PushAsync(new PendientePage());
+            Pendiente pendienteAModificar = (Pendiente)itemTappedEventArgs.Item;
+            Navigation.PushAsync(new PendientePage(pendienteAModificar));
         }
 
         private void LstPendientesOnItemSelected(object sender, SelectedItemChangedEventArgs selectedItemChangedEventArgs)
